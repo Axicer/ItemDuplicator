@@ -1,0 +1,8 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"normal": {
+			"model": "test:building_block_block_model"
+		}
+	}
+}

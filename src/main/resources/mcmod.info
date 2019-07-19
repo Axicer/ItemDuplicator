@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "itemDuplicator",
+    "name": "ItemDuplicator",
+    "description": "injection point type '%s'",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Axicer",
+      "Linuxydable"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

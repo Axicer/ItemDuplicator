@@ -1,0 +1,12 @@
+# IntelliJ IDEA generated items
+*.iml
+.idea/
+
+# Gradle generated items
+.gradle/
+
+# Compiled file generated
+build/
+
+# Client files
+run/
