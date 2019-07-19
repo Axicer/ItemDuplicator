@@ -30,6 +30,11 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+runClient {
+    // Forcing running client
+    outputs.upToDateWhen { false }
+}
+
 repositories {
     mavenCentral()
 }
