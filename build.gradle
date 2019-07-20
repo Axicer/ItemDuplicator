@@ -37,9 +37,13 @@ runClient {
 
 repositories {
     mavenCentral()
+    maven { name='TCL'; url='https://maven.mcmoddev.com' }
+    maven { url = "http://maven.shadowfacts.net/" }
 }
 
 dependencies {
+    compile("net.ndrei:tesla-core-lib:${project.teslacorelib_mc_version}-${project.teslacorelib_version}:deobf") { changing = true }
+    compile group: "net.shadowfacts", name: "Forgelin", version: "1.8.2"
 }
 
 processResources {
