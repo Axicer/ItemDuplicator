@@ -6,6 +6,7 @@
 		"north": "itemduplicator:blocks/building_block",
 		"east": "itemduplicator:blocks/building_block",
 		"south": "itemduplicator:blocks/building_block",
-		"west": "itemduplicator:blocks/building_block"
+		"west": "itemduplicator:blocks/building_block",
+		"particle": "itemduplicator:blocks/building_block"
 	}
 }
