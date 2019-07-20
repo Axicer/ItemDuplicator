@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:end_crystal"
+    },
+    "Y": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result":
+  {
+    "item": "itemduplicator:building_block",
+    "count": 1
+  }
+}
