@@ -40,7 +40,7 @@ public class BlockBuildingBlock extends Block{
     
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-    	return new TileBuildingBlock(0, DEFAULT_CAPACITY, DEFAULT_INPUT_RATE, DEFAULT_OUTPUT_RATE);
+    	return new TileBuildingBlock();
     }
     
     @Override
@@ -49,17 +49,13 @@ public class BlockBuildingBlock extends Block{
             TileEntity tile = worldIn.getTileEntity(pos);
             if(tile instanceof TileBuildingBlock) {
                 TileBuildingBlock tilebuildingblock = (TileBuildingBlock)tile;
-                if(facing == EnumFacing.EAST) {
-                    tilebuildingblock.addEnergy(500);
+                if(playerIn.isSneaking()) {
+                	playerIn.sendMessage(new TextComponentString("energy: "+tilebuildingblock.getEnergyStored(facing)));                	
                 }
-                else if(facing == EnumFacing.WEST) {
-                    tilebuildingblock.removeEnergy(500);
-                }
-                playerIn.sendMessage(new TextComponentString("energy: "+tilebuildingblock.getEnergyStored()));
                 return true;
             }
         }
-        return false;
+        return true;
     }
     
     @Override

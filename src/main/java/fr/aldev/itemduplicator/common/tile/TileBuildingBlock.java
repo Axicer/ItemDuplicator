@@ -1,88 +1,48 @@
 package fr.aldev.itemduplicator.common.tile;
 
+import cjminecraft.core.energy.compat.TileEntityEnergyConsumer;
+import ic2.api.energy.tile.IEnergyEmitter;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
-public class TileBuildingBlock extends TileEntity implements IEnergyStorage{
-
-	protected int power;
-	protected int capacity;
-	protected int outputRate;
-	protected int inputRate;
+public class TileBuildingBlock extends TileEntityEnergyConsumer implements ITickable{
 	
-	public TileBuildingBlock(int power, int capacity, int inputRate, int outputRate) {
-		this.power = Math.max(0 , Math.min(capacity, power));
-		this.capacity = capacity;
-		this.inputRate = inputRate;
-		this.outputRate = outputRate;
-	}
-	
-	public void addEnergy(int energy) {
-		this.power = Math.min(this.capacity, this.power+energy);
-	}
-	
-	public void removeEnergy(int energy) {
-		this.power = Math.max(0, this.power-energy);
-	}
-	
-	public void setEnergy(int energy) {
-		this.power = energy;
+	public TileBuildingBlock() {
+		super(1000000,Integer.MAX_VALUE,0,0);
 	}
 	
 	@Override
-	public int receiveEnergy(int maxReceive, boolean simulate) {
-		if (!canReceive())
-            return 0;
-
-        int energyReceived = Math.min(capacity - maxReceive, Math.min(this.inputRate, maxReceive));
-        if (!simulate)
-        	maxReceive += energyReceived;
-        return energyReceived;
+	public boolean canConnectEnergy(EnumFacing from) {
+		return from != EnumFacing.UP && from != EnumFacing.DOWN;
 	}
-
+	
 	@Override
-	public int extractEnergy(int maxExtract, boolean simulate) {
-		if (!canExtract())
-            return 0;
-
-        int energyExtracted = Math.min(power, Math.min(this.outputRate, maxExtract));
-        if (!simulate)
-            power -= energyExtracted;
-        return energyExtracted;
+	public boolean acceptsEnergyFrom(IEnergyEmitter emitter, EnumFacing side) {
+		return side != EnumFacing.UP && side!= EnumFacing.DOWN;
 	}
-
-	@Override
-	public int getEnergyStored() {
-		return power;
-	}
-
-	@Override
-	public int getMaxEnergyStored() {
-		return capacity;
-	}
-
-	@Override
-	public boolean canExtract() {
-		return outputRate > 0;
-	}
-
-	@Override
-	public boolean canReceive() {
-		return inputRate > 0;
-	}
-
+	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		 super.readFromNBT(compound);
-	     this.power = compound.getInteger("Power");
+		this.storage.readFromNBT(compound.getCompoundTag("energy"));
+		super.readFromNBT(compound);
 	}
 	
 	@Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        compound.setInteger("Power", this.power);
-        return compound;
-    }
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		this.storage.writeToNBT(compound);
+		return super.writeToNBT(compound);
+	}
+
+	@Override
+	public int getSinkTier() {
+		return 5;
+	}
 	
+	@Override
+	public void update() {
+		if(this.storage.getEnergyStored() == this.storage.getMaxEnergyStored()) {
+			
+		}
+	}
 }

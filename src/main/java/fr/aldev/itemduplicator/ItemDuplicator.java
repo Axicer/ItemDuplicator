@@ -37,7 +37,6 @@ public class ItemDuplicator {
      * This is the first initialization event. Register tile entities here.
      * The registry events below will have fired prior to entry to this method.
      */
-    @SuppressWarnings("deprecation")
 	@Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         logger = event.getModLog();
@@ -52,14 +51,15 @@ public class ItemDuplicator {
         ModelResourceLocation buildingBlockModelResourceLocation = new ModelResourceLocation(MOD_ID + ":" + BlockBuildingBlock.REGISTRY_NAME, "normal"); //récupération du modele du block
         ModelLoader.setCustomModelResourceLocation(itemBuildingBlock, 0, buildingBlockModelResourceLocation); //assignation du model
         
-        GameRegistry.registerTileEntity(TileBuildingBlock.class, MOD_ID+":"+BlockBuildingBlock.REGISTRY_NAME);
     }
 
     /**
      * This is the second initialization event. Register custom recipes
      */
-    @Mod.EventHandler
+    @SuppressWarnings("deprecation")
+	@Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+    	GameRegistry.registerTileEntity(TileBuildingBlock.class, MOD_ID+":"+BlockBuildingBlock.REGISTRY_NAME);
     	logger.log(Level.INFO, "Item Duplicator mod loaded !");
     }
 }
