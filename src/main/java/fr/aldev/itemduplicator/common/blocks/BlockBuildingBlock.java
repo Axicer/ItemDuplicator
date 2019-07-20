@@ -41,4 +41,14 @@ public class BlockBuildingBlock extends Block{
     public BlockRenderLayer getRenderLayer() {
     	return BlockRenderLayer.TRANSLUCENT;
     }
+    
+    @Override
+    public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+    	return 0;
+    }
+    
+    @Override
+    public float getAmbientOcclusionLightValue(IBlockState state) {
+    	return 1f;
+    }
 }
